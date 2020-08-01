@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+  app:
+    image: centos:7
+    tty: true
+    networks:
+      - imds_net
+      #- default
+
+  imds:
+    build: .
+    volumes:
+      - ~/.aws:/root/.aws
+    environment:
+      IMDS_SOURCE_PROFILE: ${IMDS_SOURCE_PROFILE:-default}
+      IMDS_ROLE_ARN: ${IMDS_ROLE_ARN}
+    networks:
+      imds_net:
+        ipv4_address: 169.254.169.254
+      #default:
+
+networks:
+  imds_net:
+    ipam:
+      config:
+        - subnet: 169.254.169.0/24
