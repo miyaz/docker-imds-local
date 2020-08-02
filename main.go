@@ -98,9 +98,6 @@ func getIAMUsername() string {
 }
 
 func createSession() *session.Session {
-	if sourceProfile == "" {
-		sourceProfile = "default"
-	}
 	creds := credentials.NewSharedCredentials("", sourceProfile)
 	config := aws.Config{Credentials: creds}
 	session, err := session.NewSession(&config)
