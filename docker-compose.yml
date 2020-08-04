@@ -10,7 +10,7 @@ services:
       #- default
 
   imds:
-    build: .
+    image: miyaz/local-imds:latest
     volumes:
       - ~/.aws:/root/.aws
     environment:
